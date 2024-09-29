@@ -1,6 +1,6 @@
 "use strict";
 var apiData = {}
-var results = []
+var currentCountryList = []
 
 fetch("https://restcountries.com/v3.1/all", {
     headers:{
@@ -10,6 +10,7 @@ fetch("https://restcountries.com/v3.1/all", {
 .then(res => res.json())
 .then(data => {
     apiData = data
+    currentCountryList = data
     apiData.sort((a,b) => a.name.common.localeCompare(b.name.common))
     for (let i = 0; i < apiData.length; i++) {
         if (apiData[i].subregion === undefined) apiData[i].subregion = "—"
@@ -22,22 +23,17 @@ fetch("https://restcountries.com/v3.1/all", {
 
 function navigationBySearch (event) {
     event.preventDefault()
-    results = []
+    currentCountryList = []
     var input, filter, container, cardTitle, txtValue
     input = document.getElementById("input-search")
     filter = input.value.toUpperCase()
-    container = document.getElementById("card-container")
 
-    cardTitle = document.getElementsByClassName("card-title")[0].innerHTML
-
-    console.log(cardTitle)
+    apiData.sort((a,b) => a.name.common.localeCompare(b.name.common))
 
     for (let i = 0; i < apiData.length - 1; i++) {
-            txtValue = document.getElementsByClassName("card-title")[i].innerHTML
+            txtValue = apiData[i].name.common
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            results.push(apiData[i])
-        } else {
-            console.log("No similarity!")
+            currentCountryList.push(apiData[i])
         }
     }
     searchResultList()
@@ -47,35 +43,33 @@ function searchResultList () {
     var cardContainer = document.getElementById("card-container");
     cardContainer.innerHTML = ''; // Clear all cards
 
-    for (let i = 0; i < results.length ; i++) {
+    for (let i = 0; i < currentCountryList.length ; i++) {
         createCountryCard(
-            results[i].name.common,
-            results[i].flags.svg,
-            results[i].region,
-            results[i].subregion,
-            results[i].population,
+            currentCountryList[i].name.common,
+            currentCountryList[i].flags.svg,
+            currentCountryList[i].region,
+            currentCountryList[i].subregion,
+            currentCountryList[i].population,
+            currentCountryList[i].area,
         )
     }
-
-    nameCondition = 0
-    regionsCondition = 0
-    subRegionsCondition = 0
-    populationCondition = 0
 }
 
-//////////////////////////////////////////////////////
+///// SORTING FUNCTIONS & VARIABLES /////
 
 let nameCondition = 0
 let regionsCondition = 0
 let subRegionsCondition = 0
 let populationCondition = 0
+let areaCondition = 0
 
+// Sorting by Name
 function sortNames() {
     var cardContainer = document.getElementById("card-container");
     cardContainer.innerHTML = ''; // Clear all cards
 
 
-    apiData.sort((a,b) => a.name.common.localeCompare(b.name.common))
+    currentCountryList.sort((a,b) => a.name.common.localeCompare(b.name.common))
 
     if (nameCondition === 0) {
         cardsList()
@@ -85,11 +79,13 @@ function sortNames() {
     }
 
 }
+
+// Sorting by Region
 function sortRegions() {
     var cardContainer = document.getElementById("card-container");
     cardContainer.innerHTML = ''; // Clear all cards
 
-    apiData.sort((a,b) => a.region.localeCompare(b.region))
+    currentCountryList.sort((a,b) => a.region.localeCompare(b.region))
 
     if (regionsCondition === 0) {
         cardsList()
@@ -98,12 +94,13 @@ function sortRegions() {
         cardsListReversed()
     }
 }
+
+// Sorting by Sub Regions
 function sortSubRegions() {
     var cardContainer = document.getElementById("card-container");
-    cardContainer.innerHTML = ''; // Clear all cards
-//    var undefinedList = []
+    cardContainer.innerHTML = '';
 
-    apiData.sort((a,b) => {
+    currentCountryList.sort((a,b) => {
         if (a.subregion === "—") return 1;  // Move 'a' down
         if (b.subregion === "—") return -1; // Move 'b' down
         return a.subregion.localeCompare(b.subregion);
@@ -116,11 +113,13 @@ function sortSubRegions() {
         cardsListReversed()
     }
 }
+
+// Sorting by Population
 function sortPopulation() {
     var cardContainer = document.getElementById("card-container");
     cardContainer.innerHTML = ''; // Clear all cards
 
-    apiData.sort((a,b) => {
+    currentCountryList.sort((a,b) => {
         if (a.population === "—") return 1;
         if (b.population === "—") return -1;
         return b.population - a.population
@@ -134,39 +133,64 @@ function sortPopulation() {
     }
 }
 
+function sortArea() {
+    var cardContainer = document.getElementById("card-container");
+    cardContainer.innerHTML = ''; // Clear all cards
+
+    currentCountryList.sort((a,b) => {
+        if (a.area === "—") return 1;
+        if (b.area === "—") return -1;
+        return b.area - a.area
+    })
+
+    if (areaCondition === 0) {
+        cardsList()
+        areaCondition = 1
+    } else {
+        cardsListReversed()
+    }
+}
+
+// Default order list
 function cardsList () {
-    for (let i = 0; i < apiData.length; i++) {
+    for (let i = 0; i < currentCountryList.length; i++) {
         createCountryCard(
-            apiData[i].name.common,
-            apiData[i].flags.svg,
-            apiData[i].region,
-            apiData[i].subregion,
-            apiData[i].population,
+            currentCountryList[i].name.common,
+            currentCountryList[i].flags.svg,
+            currentCountryList[i].region,
+            currentCountryList[i].subregion,
+            currentCountryList[i].population,
+            currentCountryList[i].area,
         )
     }
     nameCondition = 0
     regionsCondition = 0
     subRegionsCondition = 0
     populationCondition = 0
+    areaCondition = 0
 }
 
+// Reverse order list
 function cardsListReversed () {
-    for (let i = apiData.length - 1; i > 0 ; i--) {
+    for (let i = currentCountryList.length - 1; i > -1 ; i--) {
         createCountryCard(
-            apiData[i].name.common,
-            apiData[i].flags.svg,
-            apiData[i].region,
-            apiData[i].subregion,
-            apiData[i].population,
+            currentCountryList[i].name.common,
+            currentCountryList[i].flags.svg,
+            currentCountryList[i].region,
+            currentCountryList[i].subregion,
+            currentCountryList[i].population,
+            currentCountryList[i].area,
         )
     }
     nameCondition = 0
     regionsCondition = 0
     subRegionsCondition = 0
     populationCondition = 0
+    areaCondition = 0
 }
 
-function createCountryCard(countryName, flagUrl, region, subRegion, population) {
+// Creating card model
+function createCountryCard(countryName, flagUrl, region, subRegion, population, area) {
         var cardContainer = document.getElementById("card-container")
 
         var cardDiv = document.createElement("div") // class "card"
@@ -176,6 +200,7 @@ function createCountryCard(countryName, flagUrl, region, subRegion, population) 
         var regionParagraph = document.createElement("p")
         var subRegionParagraph = document.createElement("p")
         var populationParagraph = document.createElement("p")
+        var areaParagraph = document.createElement("p")
 
         cardDiv.className = "card"
         cardBody.className = "card-body"
@@ -186,11 +211,13 @@ function createCountryCard(countryName, flagUrl, region, subRegion, population) 
         regionParagraph.appendChild(document.createTextNode("Region: " + region))
         subRegionParagraph.appendChild(document.createTextNode("Sub Region: " + subRegion))
         populationParagraph.appendChild(document.createTextNode("Population: " + population))
+        areaParagraph.appendChild(document.createTextNode("Area: " + area))
 
         cardBody.appendChild(cardTitle)
         cardBody.appendChild(regionParagraph)
         cardBody.appendChild(subRegionParagraph)
         cardBody.appendChild(populationParagraph)
+        cardBody.appendChild(areaParagraph)
         cardDiv.appendChild(flagImg)
         cardDiv.appendChild(cardBody)
         cardContainer.appendChild(cardDiv)

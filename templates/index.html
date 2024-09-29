@@ -1,13 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <title>Countries Search</title>
-  </head>
-  <body>
-    <h1>Countries</h1>
-    <ul id="countries-list">
-    </ul>
-    <script src="/static/script.js"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <title>CountriesSearch</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/styles/styles.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+    <h1 class="title">CountriesSearch</h1>
+    <div id="navigation-tools">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Sort by
+            </button>
+            <ul class="dropdown-menu">
+                <li><button class="dropdown-item" onClick="sortNames()">Name</button></li>
+                <li><button class="dropdown-item" onClick="sortRegions()">Region</button></li>
+                <li><button class="dropdown-item" onClick="sortSubRegions()">Sub Region</button></li>
+                <li><button class="dropdown-item" onClick="sortPopulation()">population</button></li>
+            </ul>
+        </div>
+        <nav class="navbar bg-body-tertiary">
+          <div class="container-fluid">
+            <form class="d-flex" >
+              <input id="input-search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" onClick="navigationBySearch(event)">Search</button>
+            </form>
+          </div>
+        </nav>
+    </div>
+
+</header>
+<div id="countries-list"></div>
+
+<section id="card-container" style="--bs-columns: 3;">
+
+</section>
+
+<script src="/static/script.js"></script>
+</body>
 </html>

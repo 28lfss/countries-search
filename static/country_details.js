@@ -1,7 +1,7 @@
 const url = window.location.href // Get the full URL
-const countryName = url.split('/country/')[1].replaceAll('%20', ' ')
+const countryUrlName = url.split('/country/')[1].replaceAll('%20', ' ')
 
-fetch("https://restcountries.com/v3.1/name/" + countryName, {
+fetch("https://restcountries.com/v3.1/name/" + countryUrlName, {
     headers:{
         'Accept': 'application/json'
     }
@@ -9,13 +9,20 @@ fetch("https://restcountries.com/v3.1/name/" + countryName, {
 .then(res => res.json())
 .then(data => data.forEach (
         country => {
-        countryFlagUrl = country.flags.png
-        countryCommon = country.name.common
-        if (countryName == countryCommon) showCountryDetails(countryFlagUrl)
+            countryName = country.name.common
+            countryCode = country.cca3
+            officialCountryName = country.name.official
+            capital = country.capital
+            countryFlagUrl = country.flags.png
+            if (countryUrlName == countryName)
+                document.getElementById("country-flag").src = countryFlagUrl;
+                console.log(capital)
+//                document.createElement("h2")
+                document.getElementById("capital").innerHTML = capital;
         }
     )
 )
 
+
 function showCountryDetails(pngLink) {
-    document.getElementById("country-flag").src = pngLink;
 };

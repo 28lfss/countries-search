@@ -11,117 +11,118 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/">Countries Search</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
-            </li>
+  <header>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Countries Search</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
 
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Sort By
-              </a>
-              <ul class="dropdown-menu">
-                <li><button class="dropdown-item" onClick="sortNames()">Name</button></li>
-                <li><button class="dropdown-item" onClick="sortRegions()">Region</button></li>
-                <li><button class="dropdown-item" onClick="sortSubRegions()">Sub Region</button></li>
-                <li><button class="dropdown-item" onClick="sortPopulation()">Population</button></li>
-                <li><button class="dropdown-item" onClick="sortArea()">Area</button></li>
-              </ul>
-            </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Sort By
+                </a>
+                <ul class="dropdown-menu">
+                  <li><button class="dropdown-item" onClick="sortNames()">Name</button></li>
+                  <li><button class="dropdown-item" onClick="sortRegions()">Region</button></li>
+                  <li><button class="dropdown-item" onClick="sortSubRegions()">Sub Region</button></li>
+                  <li><button class="dropdown-item" onClick="sortPopulation()">Population</button></li>
+                  <li><button class="dropdown-item" onClick="sortArea()">Area</button></li>
+                </ul>
+              </li>
 
-            <li class="nav-link active">Filters:</li>
+              <li class="nav-link active">Filters:</li>
 
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Region
-              </a>
-              <ul class="dropdown-menu">
-                <li><button class="dropdown-item" onClick="filterRegion('Africa')">Africa</button></li>
-                <li><button class="dropdown-item" onClick="filterRegion('Americas')">Americas</button></li>
-                <li><button class="dropdown-item" onClick="filterRegion('Antarctic')">Antarctic</button></li>
-                <li><button class="dropdown-item" onClick="filterRegion('Asia')">Asia</button></li>
-                <li><button class="dropdown-item" onClick="filterRegion('Europe')">Europe</button></li>
-                <li><button class="dropdown-item" onClick="filterRegion('Oceania')">Oceania</button></li>
-              </ul>
-            </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Region
+                </a>
+                <ul class="dropdown-menu">
+                  <li><button class="dropdown-item" onClick="filterRegion('Africa')">Africa</button></li>
+                  <li><button class="dropdown-item" onClick="filterRegion('Americas')">Americas</button></li>
+                  <li><button class="dropdown-item" onClick="filterRegion('Antarctic')">Antarctic</button></li>
+                  <li><button class="dropdown-item" onClick="filterRegion('Asia')">Asia</button></li>
+                  <li><button class="dropdown-item" onClick="filterRegion('Europe')">Europe</button></li>
+                  <li><button class="dropdown-item" onClick="filterRegion('Oceania')">Oceania</button></li>
+                </ul>
+              </li>
 
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Sub Region
-              </a>
-              <ul class="dropdown-menu">
-                <li><button class="dropdown-item" onClick="filterSubRegion('Australia and New Zealand')">Australia and New Zealand</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('Caribbean')">Caribbean</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('Central America')">Central America</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('Central Asia')">Central Asia</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('Central Europe')">Central Europe</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('Eastern Africa')">Eastern Africa</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('Eastern Asia')">Eastern Asia</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('Eastern Europe')">Eastern Europe</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('Melanesia')">Melanesia</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('Micronesia')">Micronesia</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('Middle Africa')">Middle Africa</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('North America')">North America</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('Northern Africa')">Northern Africa</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('Northern Europe')">Northern Europe</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('Polynesia')">Polynesia</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('South America')">South America</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('South-Eastern Asia')">South-Eastern Asia</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('Southeast Europe')">Southeast Europe</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('Southern Africa')">Southern Africa</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('Southern Asia')">Southern Asia</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('Southern Europe')">Southern Europe</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('Western Africa')">Western Africa</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('Western Asia')">Western Asia</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('Western Europe')">Western Europe</button></li>
-                <li><button class="dropdown-item" onClick="filterSubRegion('—')">Without Sub Region</button></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Sub Region
+                </a>
+                <ul class="dropdown-menu">
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Australia and New Zealand')">Australia and New Zealand</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Caribbean')">Caribbean</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Central America')">Central America</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Central Asia')">Central Asia</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Central Europe')">Central Europe</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Eastern Africa')">Eastern Africa</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Eastern Asia')">Eastern Asia</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Eastern Europe')">Eastern Europe</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Melanesia')">Melanesia</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Micronesia')">Micronesia</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Middle Africa')">Middle Africa</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('North America')">North America</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Northern Africa')">Northern Africa</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Northern Europe')">Northern Europe</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Polynesia')">Polynesia</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('South America')">South America</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('South-Eastern Asia')">South-Eastern Asia</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Southeast Europe')">Southeast Europe</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Southern Africa')">Southern Africa</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Southern Asia')">Southern Asia</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Southern Europe')">Southern Europe</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Western Africa')">Western Africa</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Western Asia')">Western Asia</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('Western Europe')">Western Europe</button></li>
+                  <li><button class="dropdown-item" onClick="filterSubRegion('—')">Without Sub Region</button></li>
 
-              </ul>
-            </li>
+                </ul>
+              </li>
 
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Population
-              </a>
-              <ul class="dropdown-menu">
-                <li><button class="dropdown-item" onClick="filterPopulation(0, 1000000)"><1M</button></li>
-                <li><button class="dropdown-item" onClick="filterPopulation(1000000,10000000)">1M-10M</button></li>
-                <li><button class="dropdown-item" onClick="filterPopulation(10000000, 100000000)">10M-100M</button></li>
-                <li><button class="dropdown-item" onClick="filterPopulation(100000000, 'unlimited')">>100M</button></li>
-              </ul>
-            </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Population
+                </a>
+                <ul class="dropdown-menu">
+                  <li><button class="dropdown-item" onClick="filterPopulation(0, 1000000)"><1M</button></li>
+                  <li><button class="dropdown-item" onClick="filterPopulation(1000000,10000000)">1M-10M</button></li>
+                  <li><button class="dropdown-item" onClick="filterPopulation(10000000, 100000000)">10M-100M</button></li>
+                  <li><button class="dropdown-item" onClick="filterPopulation(100000000, 'unlimited')">>100M</button></li>
+                </ul>
+              </li>
 
-          </ul>
+            </ul>
 
-          <form class="d-flex" role="search">
-              <input id="input-search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" onClick="navigationBySearch(event)">Search</button>
-          </form>
+            <form class="d-flex" role="search">
+                <input id="input-search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" onClick="navigationBySearch(event)">Search</button>
+            </form>
+          </div>
         </div>
-      </div>
-    </nav>
-</header>
+      </nav>
+  </header>
 
-<section id="card-container" style="--bs-columns: 3;"></section>
+  <section id="card-container" style="--bs-columns: 3;"></section>
 
-<nav aria-label="Page navigation" class="mt-4 d-flex justify-content-center">
-    <ul class="pagination">
+  <nav id="pagination-container" aria-label="Page navigation" class="mt-4 d-flex justify-content-center">
+      <ul class="pagination">
         <li class="page-item" id="previous-page"><a class="page-link" href="#" onclick="goToPreviousPage()">Previous</a></li>
-        <li class="page-item active" id="page-1"><a class="page-link" href="#" onclick="goToPage(1)">1</a></li>
-        <li class="page-item" id="page-2"><a class="page-link" href="#" onclick="goToPage(2)">2</a></li>
-        <li class="page-item" id="page-3"><a class="page-link" href="#" onclick="goToPage(3)">3</a></li>
+      </ul>
+      <ul id="pagination" class="pagination">
+      </ul>
+      <ul class="pagination">
         <li class="page-item" id="next-page"><a class="page-link" href="#" onclick="goToNextPage()">Next</a></li>
-    </ul>
-</nav>
+      </ul>
+  </nav>
 
-<script src="/static/script.js"></script>
+  <script src="/static/script.js"></script>
 </body>
 </html>

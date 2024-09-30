@@ -15,8 +15,7 @@ fetch("https://restcountries.com/v3.1/all", {
     for (let i = 0; i < apiData.length; i++) {
         if (apiData[i].subregion === undefined) apiData[i].subregion = "—"
     }
-
-    cardsList()
+    createPagination()
     nameCondition = 1
 })
 
@@ -47,7 +46,6 @@ function filterSubRegion (subRegionName) {
 
     for (let i = 0; i < apiData.length - 1; i++) {
             txtValue = apiData[i].subregion
-            console.log(txtValue)
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             currentCountryList.push(apiData[i])
         }
@@ -119,7 +117,6 @@ let areaCondition = 0
 function sortNames() {
     var cardContainer = document.getElementById("card-container");
     cardContainer.innerHTML = ''; // Clear all cards
-
 
     currentCountryList.sort((a,b) => a.name.common.localeCompare(b.name.common))
 
@@ -206,7 +203,7 @@ function sortArea() {
 
 // Default order list
 function cardsList () {
-    for (let i = 0; i < currentCountryList.length; i++) {
+    for (let i = 0; i < 12; i++) {
         createCountryCard(
             currentCountryList[i].name.common,
             currentCountryList[i].flags.svg,
@@ -275,6 +272,38 @@ function createCountryCard(countryName, flagUrl, region, subRegion, population, 
         cardDiv.appendChild(flagImg)
         cardDiv.appendChild(cardBody)
         cardContainer.appendChild(cardDiv)
+}
+
+function goToPage(pageNumber) {
+    page = pageNumber
+}
+
+function createPagination() {
+    var cardContainer = document.getElementById("card-container");
+    cardContainer.innerHTML = ''; // Clear all cards
+    currentCountryList.sort((a,b) => a.name.common.localeCompare(b.name.common))
+    cardsList ()
+    const pages = amountPages()
+
+    for (let i = 0; i < pages; i++) {
+        var pagination = document.getElementById('pagination')
+        const newLi = document.createElement('li');
+        newLi.className = 'page-item';
+        newLi.innerHTML = `<a class="page-link" href="#" onclick="goToPage(${i + 1})">${i + 1}</a>`;
+
+        // Select the parent <ul> and the "next-page" <li> element
+        const nextPage = document.getElementById('next-page');
+
+        // Insert the new <li> before the "next-page" <li>
+        pagination.insertBefore(newLi, nextPage);
+    }
+}
+
+function amountPages() {
+    var listLength = currentCountryList.length
+    var pages = Math.floor(listLength / 12)
+    if ((listLength % 12) > 0) pages += 1
+    return pages
 }
 /*  DB IMPLEMENTATION
     fetch(

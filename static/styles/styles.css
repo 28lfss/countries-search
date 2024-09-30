@@ -5,19 +5,26 @@
     grid-template-columns: repeat(auto-fit, minmax(15em, 25em));
     grid-gap: 40px;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin-top: 4em;
 }
 
-.card img{
+.card {
+    cursor: pointer;
+    min-height: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    padding-bottom: 24px;
+    border-radius: 10px;
+}
+
+img{
     width: 100%;
     height: auto;
-    border-radius: 5px;
+    border-radius: 10px 10px 0 0;
 }
 
 h5 {
-    font-size: 2.2em;
+    font-size: 2em;
 }
 
 p {

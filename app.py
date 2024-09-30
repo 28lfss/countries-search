@@ -19,6 +19,10 @@ def search_api():
 def country_details(country=None):
     return render_template('country.html', details=country)
 
+@app.route("/testing")
+def testing():
+    return render_template('testing.html')
+
 
 ''' DB IMPLEMENTATION
 @app.route("/api/post_country_list", methods=["POST"])

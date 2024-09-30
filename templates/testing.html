@@ -14,14 +14,14 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/">Countries Search</a>
+        <a class="navbar-brand" href="/testing">Countries Search</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
+              <a class="nav-link active" aria-current="page" href="/testing">Home</a>
             </li>
 
             <li class="nav-item dropdown">
@@ -112,16 +112,14 @@
 
 <section id="card-container" style="--bs-columns: 3;"></section>
 
-<nav aria-label="Page navigation" class="mt-4 d-flex justify-content-center">
-    <ul class="pagination">
+<nav id="pagination-container" aria-label="Page navigation" class="mt-4 d-flex justify-content-center">
+    <ul id="pagination" class="pagination">
         <li class="page-item" id="previous-page"><a class="page-link" href="#" onclick="goToPreviousPage()">Previous</a></li>
-        <li class="page-item active" id="page-1"><a class="page-link" href="#" onclick="goToPage(1)">1</a></li>
-        <li class="page-item" id="page-2"><a class="page-link" href="#" onclick="goToPage(2)">2</a></li>
-        <li class="page-item" id="page-3"><a class="page-link" href="#" onclick="goToPage(3)">3</a></li>
+
         <li class="page-item" id="next-page"><a class="page-link" href="#" onclick="goToNextPage()">Next</a></li>
     </ul>
 </nav>
 
-<script src="/static/script.js"></script>
+<script src="/static/testing.js"></script>
 </body>
 </html>

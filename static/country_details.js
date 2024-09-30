@@ -17,7 +17,7 @@ fetch("https://restcountries.com/v3.1/name/" + countryUrlName, {
             if (countryUrlName == countryName)
                 document.getElementById("country-flag").src = countryFlagUrl;
                 console.log(capital)
-//                document.createElement("h2")
+                document.createElement("h2")
                 document.getElementById("capital").innerHTML = capital;
         }
     )

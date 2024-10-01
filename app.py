@@ -15,9 +15,9 @@ with app.app_context():
 def search_api():
     return render_template('index.html')
 
-@app.route("/country/<country>")
-def country_details(country=None):
-    return render_template('country.html', details=country)
+@app.route("/details/<code>")
+def country_details(code=None):
+    return render_template('details.html', details=code)
 
 @app.route("/testing")
 def testing():

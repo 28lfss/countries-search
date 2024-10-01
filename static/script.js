@@ -16,7 +16,7 @@ fetch("https://restcountries.com/v3.1/all", {
         if (apiData[i].subregion === undefined) apiData[i].subregion = "—"
     }
     createPagination()
-    goToPage(0)
+   goToPage(0)
     nameCondition = 0
 })
 
@@ -41,14 +41,6 @@ function navigationBySearch (event) {
     createPagination()
     goToPage(0)
 }
-
-function searchResultList () {
-    clearCardContainer() // Clear all cards
-
-    createPagination()
-    goToPage(0)
-}
-
 
 ///// SORTING FUNCTIONS & VARIABLES /////
 
@@ -106,9 +98,9 @@ function sortSubRegions() {
 
     clearCardContainer()
     currentCountryList.sort((a,b) => {
-        if (a.subregion === "—") return 1;  // Move 'a' down
-        if (b.subregion === "—") return -1; // Move 'b' down
-        return a.subregion.localeCompare(b.subregion);
+        if (a.subregion === "—") return 1
+        if (b.subregion === "—") return -1
+        return a.subregion.localeCompare(b.subregion)
     })
 
     createPagination()
@@ -218,13 +210,16 @@ function filterPopulation (min, max) {
 
 ///// GENERATING CARDS & PAGINATION /////
 
-// Create the cards based in the current list defined by goToPage() function
-function cardsList (i) {
+var defaultCurrentList = []
+var reversedCurrentList = []
+
+function defaultCardsList (i) {
     let stopLoop = 'break'
     if (currentCountryList[i] === undefined) {
         return stopLoop
     } else {
         createCountryCard(
+            currentCountryList[i].cca3,
             currentCountryList[i].flags.svg,
             currentCountryList[i].name.common,
             currentCountryList[i].region,
@@ -235,44 +230,96 @@ function cardsList (i) {
     }
 }
 
+function reversedCardsList (i) {
+    let stopLoop = 'break'
+    if (reversedCurrentList[i] === undefined) {
+        return stopLoop
+    } else {
+        createCountryCard(
+            reversedCurrentList[i].cca3,
+            reversedCurrentList[i].flags.svg,
+            reversedCurrentList[i].name.common,
+            reversedCurrentList[i].region,
+            reversedCurrentList[i].subregion,
+            reversedCurrentList[i].population,
+            reversedCurrentList[i].area,
+        )
+    }
+}
+
 // Create the card HTML elements
-function createCountryCard(flagUrl, countryName, region, subRegion, population, area) {
-        var cardContainer = document.getElementById("card-container")
+function createCountryCard(code, flagUrl, countryName, region, subRegion, population, area) {
+    var rowDiv = document.getElementById("row")
+    // Create the necessary elements
+    var cardDiv = document.createElement("div")
+    var flagImg = document.createElement("img")
+    var cardBody = document.createElement("div")
+    var cardTitle = document.createElement("h5")
+    var regionParagraph = document.createElement("p")
+    var regionTitle = document.createElement("b")
+    var subRegionParagraph = document.createElement("p")
+    var subRegionTitle = document.createElement("b")
+    var populationParagraph = document.createElement("p")
+    var populationTitle = document.createElement("b")
+    var areaParagraph = document.createElement("p")
+    var areaTitle = document.createElement("b")
 
-        var cardDiv = document.createElement("div") // class "card"
-        var flagImg = document.createElement("img")
-        var cardBody = document.createElement("div") // class "card-body"
-        var cardTitle = document.createElement("h5")
-        var regionParagraph = document.createElement("p")
-        var subRegionParagraph = document.createElement("p")
-        var populationParagraph = document.createElement("p")
-        var areaParagraph = document.createElement("p")
+    // Set class names based on Bootstrap layout
+    cardDiv.className = "card"
 
-        cardDiv.className = "card"
-        cardDiv.addEventListener('click', function() {window.location.href = '/country/' + countryName})
-        cardBody.className = "card-body"
-        cardTitle.className = "card-title"
+    // Add event listener to card for navigation
+    cardDiv.addEventListener('click', function () {
+        window.location.href = '/details/' + code
+    })
 
-        flagImg.src = flagUrl
-        cardTitle.appendChild(document.createTextNode(countryName))
-        regionParagraph.appendChild(document.createTextNode("Region: " + region))
-        subRegionParagraph.appendChild(document.createTextNode("Sub Region: " + subRegion))
-        populationParagraph.appendChild(document.createTextNode("Population: " + population))
-        areaParagraph.appendChild(document.createTextNode("Area: " + area))
+    // Add the Bootstrap classes to other elements
+    flagImg.src = flagUrl
+    flagImg.className = "card-img-top"
+    flagImg.alt = `${countryName} Flag`
+    cardBody.className = "card-body"
+    cardTitle.className = "card-title"
 
-        cardBody.appendChild(cardTitle)
-        cardBody.appendChild(regionParagraph)
-        cardBody.appendChild(subRegionParagraph)
-        cardBody.appendChild(populationParagraph)
-        cardBody.appendChild(areaParagraph)
-        cardDiv.appendChild(flagImg)
-        cardDiv.appendChild(cardBody)
-        cardContainer.appendChild(cardDiv)
+    // Create the titles for region, sub region, population, and area
+    regionTitle.appendChild(document.createTextNode("Region: "))
+    subRegionTitle.appendChild(document.createTextNode("Sub Region: "))
+    populationTitle.appendChild(document.createTextNode("Population: "))
+    areaTitle.appendChild(document.createTextNode("Area: "))
+
+    // Append titles and data to paragraphs
+    regionParagraph.className = "card-text"
+    subRegionParagraph.className = "card-text"
+    populationParagraph.className = "card-text"
+    areaParagraph.className = "card-text"
+
+    regionParagraph.appendChild(regionTitle)
+    subRegionParagraph.appendChild(subRegionTitle)
+    populationParagraph.appendChild(populationTitle)
+    areaParagraph.appendChild(areaTitle)
+
+    cardTitle.appendChild(document.createTextNode(countryName))
+    regionParagraph.appendChild(document.createTextNode(region))
+    subRegionParagraph.appendChild(document.createTextNode(subRegion))
+    populationParagraph.appendChild(document.createTextNode(population))
+    areaParagraph.appendChild(document.createTextNode(`${area}km²`))
+
+    // Append elements to the card body
+    cardBody.appendChild(cardTitle)
+    cardBody.appendChild(regionParagraph)
+    cardBody.appendChild(subRegionParagraph)
+    cardBody.appendChild(populationParagraph)
+    cardBody.appendChild(areaParagraph)
+
+    // Append the flag image and body to the card
+    cardDiv.appendChild(flagImg)
+    cardDiv.appendChild(cardBody)
+
+    // Append the column div to the row div
+    rowDiv.appendChild(cardDiv)
 }
 
 // Used to clear all the cards inside "card-container"
 function clearCardContainer() {
-    var cardContainer = document.getElementById("card-container")
+    var cardContainer = document.getElementById("row")
     cardContainer.innerHTML = ''
 }
 
@@ -300,11 +347,25 @@ function createPagination() {
     }
 }
 
+// Define the active page
+function defineActivePage(activePage) {
+    var oldActivePages = document.getElementsByClassName('active')
+    if (oldActivePages.length > 0) {
+        for (let i = 1; i < oldActivePages.length; i++) {
+            oldActivePages[i].classList.remove('active')
+        }
+    }
+    var currentPage = document.getElementById(`page-${activePage}`)
+    currentPage.classList.add('active')
+}
+
 // Show the chosen page
 function goToPage(pageNumber) {
     clearCardContainer()
+    defineActivePage(pageNumber + 1)
 
-    var activePage = document.getElementsByClassName('active')
+    defaultCurrentList = currentCountryList.slice()
+    reversedCurrentList = currentCountryList.slice().reverse()
 
     let firstArrValue, lastArrValue
     firstArrValue = pageNumber === 0 ? 0 : (pageNumber * 12)
@@ -312,15 +373,14 @@ function goToPage(pageNumber) {
 
     if (currentFilterCondition === 0) {
         for(firstArrValue; firstArrValue < lastArrValue; firstArrValue++) {
-            let result = cardsList(firstArrValue)
+            let result = defaultCardsList(firstArrValue)
             if (result === 'break') {
                 break
             }
         }
     } else {
-        currentCountryList.reverse()
         for(firstArrValue; firstArrValue < lastArrValue; firstArrValue++) {
-            let result = cardsList(firstArrValue)
+            let result = reversedCardsList(firstArrValue)
             if (result === 'break') {
                 break
             }

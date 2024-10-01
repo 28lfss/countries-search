@@ -1,33 +1,80 @@
+.custom-header {
+    height: 120px;
+}
 
-/* CARDS & CONTAINER STYLES */
+.navbar {
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.navbar-brand {
+    font-size: 2.5rem;
+}
+
+.nav-link {
+    font-size: 1.4rem;
+}
+
+.navbar-collapse {
+    align-items: center;
+}
+
+.form-control {
+    height: 50px;
+    font-size: 1.4rem;
+    padding: 10px;
+}
+
+.btn {
+    padding: 0 15px;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: white;
+}
+
 #card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15em, 25em));
-    grid-gap: 40px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.row {
     justify-content: center;
-    margin-top: 4em;
+    gap: 30px;
 }
 
 .card {
     cursor: pointer;
-    min-height: 100%;
-    border-radius: 5px;
-    overflow: hidden;
-    padding-bottom: 24px;
-    border-radius: 10px;
+    max-width: 400px;
+    transition: transform 0.2s;
 }
 
-img{
-    width: 100%;
-    height: auto;
-    border-radius: 10px 10px 0 0;
+.card:hover {
+    transform: scale(1.05);
 }
 
-h5 {
-    font-size: 2em;
+.card-body {
+    padding: 1.5rem;
 }
 
-p {
-    font-size: 1.5em;
-    font-weight: 600;
+.card-title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1.25rem;
+}
+
+@media (min-width: 576px) {
+    .card-title {
+        font-size: 1.75rem;
+    }
+
+    .card-text {
+        font-size: 1.5rem;
+    }
+}
+
+.page-item {
+    width: 45px;
 }

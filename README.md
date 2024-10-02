@@ -18,17 +18,21 @@ Website that consumes a API(RestCountries) to list and display information about
 2. *Activate venv*
 
 Mac/Linux:
-python3 -m venv venv
-source venv/bin/activate
+
+- python3 -m venv venv
+
+- source venv/bin/activate
 
 Windows:
-python -m venv venv
-.\venv\Scripts\activate
 
-4. *Install dependencies*
+- python -m venv venv
 
-pip install -r requirements.txt
+- .\venv\Scripts\activate_this
 
-6. *Run app*
+3. *Install dependencies*
 
-flask run
+- pip install -r requirements.txt
+
+4. *Run app*
+
+- flask run

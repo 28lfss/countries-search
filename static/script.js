@@ -1,6 +1,7 @@
 "use strict";
 var apiData = {}
 var currentCountryList = []
+var reversedCurrentList = []
 
 fetch("https://restcountries.com/v3.1/all", {
     headers:{
@@ -19,6 +20,13 @@ fetch("https://restcountries.com/v3.1/all", {
    goToPage(0)
     nameCondition = 0
 })
+
+document.getElementById("input-search").addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault(); // Previne o envio do formulário ao pressionar Enter
+    console.log("Enter foi pressionado, mas a página não recarregou.");
+  }
+});
 
 
 ///// NAVIGATION BY SEARCH FUNCTIONS /////
@@ -210,9 +218,6 @@ function filterPopulation (min, max) {
 
 ///// GENERATING CARDS & PAGINATION /////
 
-var defaultCurrentList = []
-var reversedCurrentList = []
-
 function defaultCardsList (i) {
     let stopLoop = 'break'
     if (currentCountryList[i] === undefined) {
@@ -220,7 +225,7 @@ function defaultCardsList (i) {
     } else {
         createCountryCard(
             currentCountryList[i].cca3,
-            currentCountryList[i].flags.svg,
+            currentCountryList[i].flags.png,
             currentCountryList[i].name.common,
             currentCountryList[i].region,
             currentCountryList[i].subregion,
@@ -237,7 +242,7 @@ function reversedCardsList (i) {
     } else {
         createCountryCard(
             reversedCurrentList[i].cca3,
-            reversedCurrentList[i].flags.svg,
+            reversedCurrentList[i].flags.png,
             reversedCurrentList[i].name.common,
             reversedCurrentList[i].region,
             reversedCurrentList[i].subregion,
@@ -364,7 +369,6 @@ function goToPage(pageNumber) {
     clearCardContainer()
     defineActivePage(pageNumber + 1)
 
-    defaultCurrentList = currentCountryList.slice()
     reversedCurrentList = currentCountryList.slice().reverse()
 
     let firstArrValue, lastArrValue
@@ -387,15 +391,3 @@ function goToPage(pageNumber) {
         }
     }
 }
-
-/*  DB IMPLEMENTATION
-    fetch(
-        "/api/post_country_list",{
-        method: "POST",
-        headers: {
-            Accept : 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(res)
-    })
-*/

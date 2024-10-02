@@ -16,6 +16,7 @@ Website that consumes a API(RestCountries) to list and display information about
    cd <your-repo-folder>
 
 2. *Activate venv*
+
 Mac/Linux:
 python3 -m venv venv
 source venv/bin/activate
@@ -25,7 +26,9 @@ python -m venv venv
 .\venv\Scripts\activate
 
 4. *Install dependencies*
+
 pip install -r requirements.txt
 
-5. *Run app*
+6. *Run app*
+
 flask run

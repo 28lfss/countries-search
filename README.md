@@ -27,7 +27,7 @@ Windows:
 
 - python -m venv venv
 
-- .\venv\Scripts\activate_this
+- .\venv\Scripts\activate
 
 3. *Install dependencies*
 
